@@ -1,0 +1,87 @@
+nano input.txt
+
+
+Hello Scala Hadoop Scala new Scala
+
+
+
+nano wordcount.scala
+
+
+val textFile = sc.textFile("input.txt")
+
+textFile.flatMap(_.split(" "))
+  .map((_,1))
+  .reduceByKey(_+_)
+  .collect()
+  .foreach(println)
+
+
+
+bin/spark-shell
+:load wordcount.scala
+
+
+
+
+nano bubblesort.scala
+
+
+// Bubble Sort using Scala (with Spark context just for setup)
+
+val data = Array(64, 34, 25, 12, 22, 11, 90)
+
+println("Original Array:")
+println(data.mkString(" "))
+
+// Bubble Sort logic
+for (i <- 0 until data.length) {
+  for (j <- 0 until data.length - i - 1) {
+    if (data(j) > data(j + 1)) {
+      val temp = data(j)
+      data(j) = data(j + 1)
+      data(j + 1) = temp
+    }
+  }
+}
+
+println("Sorted Array:")
+println(data.mkString(" "))
+
+
+
+
+bin/spark-shell
+
+:load /home/azureuser/bubblesort.scala
+
+
+
+
+
+nano factorial.scala
+
+
+// Factorial Program in Scala
+
+val num = 5   
+var fact = 1
+
+println("Number: " + num)
+
+// Factorial logic
+for (i <- 1 to num) {
+  fact = fact * i
+}
+
+println("Factorial: " + fact)
+
+
+
+
+cd ~/spark-3.5.1-bin-hadoop3
+bin/spark-shell
+
+
+
+:load /home/azureuser/factorial.scala
